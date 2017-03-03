@@ -20,11 +20,17 @@ RSpec.describe Chef, type: :model do
       is_expected.to_not allow_value(invalids).for(:email)
     end
   end
-  it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
-  # it "expect email to be lover case before hitting db" do
-  #   mixed_email = "JoHhhhhhhN@eXaMplE.Com"
-  #   @chef.email = mixed_email
-  #   @chef.save
-  #   expect(mixed_email.downcase).to eq(@chef.reload.email)
-  # end
+  # it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
+  it "expect exmail to be unique with case insensitive" do
+    mixed_email = "JoHN@eXaMplE.Com"
+    @chef.save
+    @chef.email = mixed_email
+    expect(@chef).to be_valid
+  end
+  it "expect email to be lover case before hitting db" do
+    mixed_email = "JoHhhhhhhN@eXaMplE.Com"
+    @chef.email = mixed_email
+    @chef.save
+    expect(mixed_email.downcase).to eq(@chef.reload.email)
+  end
 end
