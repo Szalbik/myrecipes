@@ -33,4 +33,5 @@ RSpec.describe Chef, type: :model do
     @chef.save
     expect(mixed_email.downcase).to eq(@chef.reload.email)
   end
+  it { is_expected.to have_many(:recipes) }
 end
